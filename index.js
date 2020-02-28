@@ -8,13 +8,17 @@ require('dotenv').config()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+const cors = require('cors');
+app.use(cors());
+
 //Test route
 app.get('/api/test', (req, res) => {
+  console.log(req.body);
   res.send("Success!");
 });
 
 app.post('/api/form', (req, res) => {
-    console.log(req.body);
+    console.log('this is req.body in form', req.body);
     let transporter = nodemailer.createTransport({
         host: process.env.HOST,
         port: process.env.MAILPORT,
